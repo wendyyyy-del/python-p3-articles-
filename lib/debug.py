@@ -1,6 +1,13 @@
+import sys
+import os
+
+# Ensure the project root is in the import path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from lib.models.author import Author
-from lib.models.article import Article
 from lib.models.magazine import Magazine
+from lib.models.article import Article
+from lib.db.connection import CONN, CURSOR
 
 def manual_test():
     print("Authors:")
@@ -28,8 +35,14 @@ def manual_test():
     print("\nArticles:")
     for article in Article.all():
         print(f"{article.id}: {article.title}")
-        print(f" Author: {article.author().name}")
-        print(f" Magazine: {article.magazine().name}")
+        try:
+            print(f" Author: {article.get_author().name}")
+        except:
+            print(" Author: (missing or invalid)")
+        try:
+            print(f" Magazine: {article.get_magazine().name}")
+        except:
+            print(" Magazine: (missing or invalid)")
         print()
 
 if __name__ == "__main__":

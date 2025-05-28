@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS articles (
     magazine_id INTEGER NOT NULL,
     FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE,
     FOREIGN KEY (magazine_id) REFERENCES magazines(id) ON DELETE CASCADE
-) ;
+);
